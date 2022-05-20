@@ -36,7 +36,6 @@ function generateRectangle() {
     }
   }
 
-//   setInterval(generateRectangle, 1500);
 }
 
 generateRectangle();
