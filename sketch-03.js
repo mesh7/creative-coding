@@ -26,7 +26,12 @@ const sketch = ({ context, width, height }) => {
 
         const dist = agent.pos.getDistance(other.pos);
 
-        if (dist <= 250) {
+        if (dist <= 300) {
+          let color = 'black';
+          if(dist < 170) {
+            color = 'red'
+          }
+          context.strokeStyle = color
           context.lineWidth = math.mapRange(dist, 0, 200, 12, 1);
 
           context.beginPath();
@@ -40,7 +45,8 @@ const sketch = ({ context, width, height }) => {
     agents.forEach((agent) => {
       agent.update();
       agent.draw(context);
-      agent.bounce(width, height);
+      // agent.bounce(width, height);
+      agent.wrap(width, height);
     });
 
     // const agentA = new Agent(400, 800);
@@ -76,6 +82,13 @@ class Agent {
   bounce(width, height) {
     if (this.pos.x <= 0 || this.pos.x >= width) this.vel.x *= -1;
     if (this.pos.y <= 0 || this.pos.y >= height) this.vel.y *= -1;
+  }
+
+  wrap(width, height) {
+    if (this.pos.x > width) this.pos.x = 0;
+    if (this.pos.x < 0) this.pos.x = width;
+    if (this.pos.y > height) this.pos.y = 0;
+    if (this.pos.y < 0) this.pos.y = height;
   }
 
   update() {
