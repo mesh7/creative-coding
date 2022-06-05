@@ -9,7 +9,12 @@ const sketch = () => {
     context.fillStyle = 'white';
     context.fillRect(0, 0, width, height);
 
-    const point = 
+    const point = { x: 400, y: 800, radius: 10};
+
+    context.beginPath();
+    context.arc(point.x, point.y, point.radius, 0, Math.PI*2);
+    context.fillStyle = "black"
+    context.fill();
   };
 };
 
